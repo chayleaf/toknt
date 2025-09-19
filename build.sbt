@@ -9,8 +9,10 @@ val baseUrl =
   "https://raw.githubusercontent.com/antlr/grammars-v4/6b517735620223475eefaa85c92f8d6bce15f360"
 val lexers = Seq(
   "cpp/CPP14Lexer.g4",
-  "python/python3/Python3Lexer.g4",
-  "python/python3/Java/Python3LexerBase.java",
+  "python/python3_13/PythonLexer.g4",
+  "python/python3_13/Java/PythonLexerBase.java",
+  // used by PythonLexer...
+  "python/python3_13/PythonParser.g4",
   "haskell/HaskellLexer.g4",
   "haskell/Java/HaskellBaseLexer.java",
   "rust/RustLexer.g4",
@@ -26,6 +28,7 @@ ThisBuild / organizationName := "chayleaf"
 
 enablePlugins(Antlr4Plugin)
 Antlr4 / antlr4PackageName := Some((ThisBuild / organization).value)
+Antlr4 / antlr4Version := "4.13.2"
 
 lazy val root = (project in file("."))
   .settings(
@@ -39,7 +42,7 @@ lazy val root = (project in file("."))
     javacOptions ++= Seq("-source", "8", "-target", "8"),
     libraryDependencies ++= Seq(
       munit % Test,
-      "org.antlr" % "antlr4-runtime" % "4.8-1"
+      "org.antlr" % "antlr4-runtime" % (Antlr4 / antlr4Version).value
     )
   )
 

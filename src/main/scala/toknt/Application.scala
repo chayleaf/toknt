@@ -7,7 +7,7 @@ import org.chayleaf.{
   CPP14Lexer,
   CSharpLexer,
   HaskellLexer,
-  Python3Lexer,
+  PythonLexer,
   RustLexer
 }
 
@@ -30,10 +30,10 @@ object Application {
             Some(new CSharpLexer(charStream).getAllTokens.stream)
           case "py" =>
             Some(
-              new Python3Lexer(charStream).getAllTokens.stream.filter(x =>
+              new PythonLexer(charStream).getAllTokens.stream.filter(x =>
                 x.getType match {
-                  case Python3Lexer.INDENT | Python3Lexer.DEDENT |
-                      Python3Lexer.NEWLINE =>
+                  case PythonLexer.INDENT | PythonLexer.DEDENT |
+                      PythonLexer.NEWLINE =>
                     false
                   case _ => true
                 }
