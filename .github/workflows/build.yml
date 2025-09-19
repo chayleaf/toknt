@@ -1,0 +1,23 @@
+name: Build
+on:
+  push:
+jobs:
+  test:
+    runs-on: ubuntu-latet
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 11
+      - name: Setup sbt
+        uses: sbt/setup-sbt@v1
+      - name: Build
+        run: sbt assembly
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: jar
+          path: target/scala-*/toknt-assembly-*.jar
