@@ -50,11 +50,15 @@ object Application {
                 }
               )
             )
-          case "kt" => Some(new KotlinLexer(charStream).getAllTokens.stream.filter(x => 
-            x.getType match {
-              case KotlinLexer.NL => false
-              case _ => true
-            }))
+          case "kt" =>
+            Some(
+              new KotlinLexer(charStream).getAllTokens.stream.filter(x =>
+                x.getType match {
+                  case KotlinLexer.NL => false
+                  case _              => true
+                }
+              )
+            )
           case _ => None
         }
       )
