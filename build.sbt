@@ -18,7 +18,9 @@ val lexers = Seq(
   "rust/RustLexer.g4",
   "rust/Java/RustLexerBase.java",
   "csharp/CSharpLexer.g4",
-  "csharp/Java/CSharpLexerBase.java"
+  "csharp/Java/CSharpLexerBase.java",
+  "kotlin/kotlin/KotlinLexer.g4",
+  "kotlin/kotlin/UnicodeClasses.g4"
 )
 
 ThisBuild / scalaVersion := "3.7.3"
