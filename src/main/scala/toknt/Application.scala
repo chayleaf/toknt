@@ -1,4 +1,4 @@
-package toknt
+package org.chayleaf.toknt
 
 import scala.io.Source
 import scala.util.Using
@@ -18,9 +18,8 @@ object Application {
     filename
       .split("\\.")
       .lastOption
-      .map(_.toLowerCase)
       .flatMap(ext =>
-        ext match {
+        ext.toLowerCase match {
           case "c" | "cc" | "cpp" | "cxx" | "c++" | "h" | "hh" | "hpp" | "hxx" |
               "h++" =>
             Some(new CPP14Lexer(charStream).getAllTokens.stream)
