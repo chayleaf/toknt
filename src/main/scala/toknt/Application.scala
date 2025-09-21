@@ -8,7 +8,8 @@ import org.chayleaf.{
   CSharpLexer,
   HaskellLexer,
   PythonLexer,
-  RustLexer
+  RustLexer,
+  KotlinLexer
 }
 
 object Application {
@@ -50,6 +51,11 @@ object Application {
                 }
               )
             )
+          case "kt" => Some(new KotlinLexer(charStream).getAllTokens.stream.filter(x => 
+            x.getType match {
+              case KotlinLexer.NL => false
+              case _ => true
+            }))
           case _ => None
         }
       )
