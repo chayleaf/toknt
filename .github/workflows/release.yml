@@ -20,12 +20,6 @@ jobs:
       - name: Build
         run: sbt assembly
 
-      - name: Upload
-        uses: actions/upload-artifact@v4
-        with:
-          name: jar
-          path: target/scala-*/toknt-assembly-*.jar
-
       - name: Rename JAR
         run: |
           mkdir -p dist
