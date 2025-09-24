@@ -1,0 +1,38 @@
+name: Release
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 11
+
+      - name: Setup sbt
+        uses: sbt/setup-sbt@v1
+
+      - name: Build
+        run: sbt assembly
+
+      - name: Rename JAR
+        run: |
+          mkdir -p dist
+          cp target/scala-*/toknt-assembly-*.jar dist/toknt.jar
+
+      - name: Create Latest Release
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: latest
+          name: Latest Build
+          draft: false
+          prerelease: false
+          files: dist/toknt.jar
+
